@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <p id="number-in-seconds">9999999</p>
+        <p>-----</p>
+        <p id="hhmmss">00:00:00</p>
+    </div>
+    <script>
+        const hhmmssContainer = document.querySelector("#hhmmss")
+        const numberInSeconds = parseInt(document.querySelector("#number-in-seconds").innerText)
+
+        function converter(numberInSeconds){
+            let hh = 0;
+            let mm = 0;
+            let ss = 0;
+            getHours = () =>{
+                if(numberInSeconds >= 3600){
+                    hh = hh + 1;
+                    numberInSeconds = numberInSeconds - 3600;
+                    getHours();
+                }else return;
+            }
+            getMinutes = () =>{
+                if(numberInSeconds >= 60){
+                    mm = mm + 1;
+                    numberInSeconds = numberInSeconds - 60;
+                    if(mm >= 60){
+                        mm = 0;
+                        hh += 1;
+                    }
+                    getMinutes();
+                }else return;
+            }
+            getSeconds = () =>{
+                return ss = numberInSeconds;
+            }
+            getHours();
+            getMinutes();
+            getSeconds();
+            return `${hh}:${mm}:${ss}`;
+        }
+        hhmmssContainer.innerText = converter(numberInSeconds);
+
+    </script>
+</body>
+</html>
